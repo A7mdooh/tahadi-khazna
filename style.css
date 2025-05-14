@@ -1,0 +1,188 @@
+/* style.css */
+body {
+  font-family: 'Cairo', sans-serif;
+  text-align: center;
+  background-color: #f7f9fa;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  color: #007b83;
+  font-size: 2.5em;
+  margin: 20px 0;
+}
+
+.question-text {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.answers-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.answer-btn {
+  background-color: #ffc107;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 80%;
+  max-width: 300px;
+}
+.answer-btn {
+  cursor: url('images/hand-cursor.png'), pointer; /* صورة يد */
+}
+
+.answer-btn:hover {
+  background-color: #e0a800;
+}
+
+#students-waiting {
+  color: #007b83;
+  font-weight: bold;
+  margin-top: 20px;
+  font-size: 1.2em;
+}
+
+#who-is-winner button {
+  background-color: #28a745;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.5em;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+#who-is-winner button:hover {
+  background-color: #218838;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  font-size: 0.9em;
+}
+
+input[type="text"] {
+  padding: 10px;
+  font-size: 1em;
+  margin: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 80%;
+  max-width: 300px;
+}
+
+.start-button {
+  background-color: #007bff;
+  color: white;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.start-button:hover {
+  background-color: #0056b3;
+}
+
+.instructions {
+  font-size: 1.2em;
+  max-width: 600px;
+  margin: auto;
+  background: #e9f5f2;
+  padding: 20px;
+  border-radius: 10px;
+  line-height: 1.8em;
+}
+
+.logos img, .game-image img {
+  width: 120px;
+  height: auto;
+  margin: 10px;
+}
+
+#winner-name {
+  font-size: 2em;
+  margin: 20px 0;
+  color: green;
+}
+
+/* مؤثرات مرئية */
+#fireworks-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+#money-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 9998;
+}
+
+.money {
+  position: absolute;
+  width: 40px;
+  height: auto;
+  animation: fall linear infinite;
+  opacity: 0.9;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-100px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .answer-btn {
+    font-size: 1em;
+    padding: 10px 20px;
+  }
+
+  h1 {
+    font-size: 1.8em;
+  }
+
+  .question-text {
+    font-size: 1.4em;
+  }
+
+  .start-button {
+    font-size: 1em;
+    padding: 10px 20px;
+  }
+}

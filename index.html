@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحدي خزنة</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f7f9fa;
+            color: #333;
+        }
+    </style>
+    <script>
+        const questions = [
+            { question: "ما معنى الادخار؟", answers: ["أن أشتري كل ما أريد", "أن أترك المال يضيع", "أن أحتفظ بجزء من مالي للمستقبل", "أن أطلب المال من الآخرين"], correct: 2 },
+            { question: "لماذا نحتاج إلى ميزانية؟", answers: ["لنشتري أكثر", "لنخطط كيف نصرف المال", "لنلعب مع النقود", "لنعطي المال لأصدقائنا"], correct: 1 },
+            { question: "من هو البنك؟", answers: ["مكان للعب", "مكان لحفظ المال وتقديم خدمات مالية", "متجر لبيع الملابس", "مكتب للمدرسة"], correct: 1 },
+            { question: "ما الفرق بين الحاجة والرغبة؟", answers: ["لا يوجد فرق", "الحاجة شيء أساسي، والرغبة شيء إضافي", "الرغبة أهم من الحاجة", "الحاجة تُشترى أولاً دائماً"], correct: 1 },
+            { question: "ماذا يعني أن أكون مسؤولاً مالياً؟", answers: ["أشتري كل شيء أراه", "أخطط وأصرف بحكمة", "أنفق أكثر من مالي", "لا أهتم بالمال"], correct: 1 },
+            { question: "ما هو أفضل وقت للادخار؟", answers: ["بعد أن أصرف كل المال", "قبل أن أستلم المال", "عندما أقرر ألا أشتري شيئاً", "عندما أستلم المال"], correct: 3 },
+            { question: "إذا حصلت على مصروفي، ماذا أفعل أولاً؟", answers: ["أشتري الحلوى", "أخطط أين سأصرفه وادخر جزءًا منه", "أطلب المزيد من والدي", "أعطيه لصديقي"], correct: 1 },
+            { question: "ما هي فائدة الادخار؟", answers: ["لا فائدة منه", "يجعلني أشتري أشياء أكثر", "يساعدني في وقت الحاجة", "يضيع الوقت"], correct: 2 },
+            { question: "ماذا أحتاج لعمل ميزانية؟", answers: ["دفتر وقلم", "هاتف فقط", "ألعاب", "صديق غني"], correct: 0 },
+            { question: "ما معنى أن أستثمر مالي؟", answers: ["أضيّعه في التسوق", "أحتفظ به في البيت", "أستخدمه ليزيد وينمو", "أشتري به طعامًا فقط"], correct: 2 }
+        ];
+    </script>
+</head>
+<body>
+    <!-- واجهة البداية -->
+    <div class="welcome-screen">
+        <div class="logos">
+            <img src="شعار%20خزنة.jpeg" alt="شعار خزنة">
+            <img src="شعار%20المدرسة.png" alt="شعار المدرسة">
+        </div>
+        <div class="game-image">
+            <img src="i.png" alt="صورة اللعبة">
+        </div>
+        <h1>تحدي خزنة</h1>
+        <div class="instructions">
+            <p>مرحبًا بكم في تحدي خزنة، اللعبة التفاعلية التي تختبر معلوماتكم في الثقافة المالية!</p>
+            <ul>
+                <li>سيتناوب الطلاب في الإجابة على الأسئلة.</li>
+                <li>كل إجابة صحيحة تمنح نقاطًا.</li>
+                <li>في النهاية نعلن عن الفائز الأعلى نقاطًا.</li>
+            </ul>
+        </div>
+        <button class="start-button" onclick="document.getElementById('start-screen').style.display='block'; this.parentElement.style.display='none';">ابدأ</button>
+    </div>
+
+    <!-- شاشة إدخال الأسماء -->
+    <div id="start-screen" style="display:none; text-align:center; padding:20px;">
+        <h1>تحدي الأسئلة التفاعلي</h1>
+        <p>يرجى إدخال أسماء الطلاب الثلاثة لبدء التحدي:</p>
+        <input type="text" id="student1" placeholder="اسم الطالب 1">
+        <input type="text" id="student2" placeholder="اسم الطالب 2">
+        <input type="text" id="student3" placeholder="اسم الطالب 3">
+        <br><br>
+        <button onclick="startChallenge()">ابدأ التحدي</button>
+    </div>
+
+    <!-- شاشة الأسئلة -->
+    <div id="question-screen" style="display:none; text-align:center;">
+        <h1>تحدي الأسئلة التفاعلي</h1>
+        <div id="question-container">
+            <p id="question" class="question-text">ما هو السؤال؟</p>
+            <img src="i.png" alt="صورة توضيحية" id="question-image" style="width: 100px; margin-top: 10px;">
+        </div>
+        <div id="current-student" style="margin: 20px; font-size: 1.5em; font-weight: bold;">
+            دور: <span id="student-turn">الطالب 1</span>
+        </div>
+        <div class="answers-container">
+            <button class="answer-btn" data-answer="0">خيار 1</button>
+            <button class="answer-btn" data-answer="1">خيار 2</button>
+            <button class="answer-btn" data-answer="2">خيار 3</button>
+            <button class="answer-btn" data-answer="3">خيار 4</button>
+        </div>
+        <p id="students-waiting">في انتظار إجابات الطلاب...</p>
+        <div id="who-is-winner" style="display:none;">
+            <button onclick="showWinner()">من هو الفائز؟</button>
+        </div>
+    </div>
+
+    <!-- شاشة الفائز -->
+    <div id="winner-screen" style="display:none; text-align:center;">
+        <h1>الفائز هو:</h1>
+        <h2 id="winner-name" style="color: green; font-size: 40px;"></h2>
+        <img id="winner-img" src="winner.png" alt="صورة الفائز" style="width: 100px;">
+        <button onclick="restart()">ابدأ من جديد</button>
+    </div>
+
+    <!-- مؤثرات صوتية -->
+    <audio id="correct-sound" src="sounds/correct.mp3"></audio>
+    <audio id="wrong-sound" src="sounds/wrong.mp3"></audio>
+    <audio id="win-sound" src="sounds/win.mp3"></audio>
+    <audio id="hover-sound" src="sounds/s.mp3"></audio>
+
+    <!-- مؤثرات مرئية عند الفوز -->
+    <canvas id="fireworks-canvas"></canvas>
+    <div id="money-rain" style="display:none;"></div>
+
+    <!-- التذييل -->
+    <footer>
+        تصميم: الأستاذ أحمد الضامري - معلم تقنية المعلومات | إشراف: الأستاذ أحمد العامري - أخصائي التوجيه المهني
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
